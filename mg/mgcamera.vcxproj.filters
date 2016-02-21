@@ -1,0 +1,348 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="common\etc\config.cpp">
+      <Filter>common\etc</Filter>
+    </ClCompile>
+    <ClCompile Include="common\etc\dbg.cpp">
+      <Filter>common\etc</Filter>
+    </ClCompile>
+    <ClCompile Include="common\etc\genid.cpp">
+      <Filter>common\etc</Filter>
+    </ClCompile>
+    <ClCompile Include="common\etc\ip.cpp">
+      <Filter>common\etc</Filter>
+    </ClCompile>
+    <ClCompile Include="common\etc\observer.cpp">
+      <Filter>common\etc</Filter>
+    </ClCompile>
+    <ClCompile Include="common\etc\observer2.cpp">
+      <Filter>common\etc</Filter>
+    </ClCompile>
+    <ClCompile Include="common\etc\stringfunc.cpp">
+      <Filter>common\etc</Filter>
+    </ClCompile>
+    <ClCompile Include="common\math\matrix44.cpp">
+      <Filter>common\math</Filter>
+    </ClCompile>
+    <ClCompile Include="common\math\plane.cpp">
+      <Filter>common\math</Filter>
+    </ClCompile>
+    <ClCompile Include="common\math\quaternion.cpp">
+      <Filter>common\math</Filter>
+    </ClCompile>
+    <ClCompile Include="common\math\ray.cpp">
+      <Filter>common\math</Filter>
+    </ClCompile>
+    <ClCompile Include="common\math\triangle.cpp">
+      <Filter>common\math</Filter>
+    </ClCompile>
+    <ClCompile Include="common\math\vector2.cpp">
+      <Filter>common\math</Filter>
+    </ClCompile>
+    <ClCompile Include="common\math\vector3.cpp">
+      <Filter>common\math</Filter>
+    </ClCompile>
+    <ClCompile Include="common\math\vector4.cpp">
+      <Filter>common\math</Filter>
+    </ClCompile>
+    <ClCompile Include="network\netlauncher.cpp">
+      <Filter>network</Filter>
+    </ClCompile>
+    <ClCompile Include="network\network.cpp">
+      <Filter>network</Filter>
+    </ClCompile>
+    <ClCompile Include="network\packetqueue.cpp">
+      <Filter>network</Filter>
+    </ClCompile>
+    <ClCompile Include="network\session.cpp">
+      <Filter>network</Filter>
+    </ClCompile>
+    <ClCompile Include="network\tcpclient.cpp">
+      <Filter>network</Filter>
+    </ClCompile>
+    <ClCompile Include="network\tcpserver.cpp">
+      <Filter>network</Filter>
+    </ClCompile>
+    <ClCompile Include="network\udpclient.cpp">
+      <Filter>network</Filter>
+    </ClCompile>
+    <ClCompile Include="network\udpserver.cpp">
+      <Filter>network</Filter>
+    </ClCompile>
+    <ClCompile Include="camcommon\camcommon.cpp">
+      <Filter>camcommon</Filter>
+    </ClCompile>
+    <ClCompile Include="camcommon\camera.cpp">
+      <Filter>camcommon</Filter>
+    </ClCompile>
+    <ClCompile Include="camcommon\config.cpp">
+      <Filter>camcommon</Filter>
+    </ClCompile>
+    <ClCompile Include="camcommon\detectpoint.cpp">
+      <Filter>camcommon</Filter>
+    </ClCompile>
+    <ClCompile Include="camcommon\detectrect.cpp">
+      <Filter>camcommon</Filter>
+    </ClCompile>
+    <ClCompile Include="camcommon\LEDBlinkCapture.cpp">
+      <Filter>camcommon</Filter>
+    </ClCompile>
+    <ClCompile Include="camcommon\LEDCalibrater.cpp">
+      <Filter>camcommon</Filter>
+    </ClCompile>
+    <ClCompile Include="camcommon\linecontour.cpp">
+      <Filter>camcommon</Filter>
+    </ClCompile>
+    <ClCompile Include="camcommon\movie.cpp">
+      <Filter>camcommon</Filter>
+    </ClCompile>
+    <ClCompile Include="camcommon\pidcontrol.cpp">
+      <Filter>camcommon</Filter>
+    </ClCompile>
+    <ClCompile Include="camcommon\RecognitionConfig.cpp">
+      <Filter>camcommon</Filter>
+    </ClCompile>
+    <ClCompile Include="camcommon\recognitionedgeconfig.cpp">
+      <Filter>camcommon</Filter>
+    </ClCompile>
+    <ClCompile Include="camcommon\rectcontour.cpp">
+      <Filter>camcommon</Filter>
+    </ClCompile>
+    <ClCompile Include="camcommon\roi.cpp">
+      <Filter>camcommon</Filter>
+    </ClCompile>
+    <ClCompile Include="camcommon\screen.cpp">
+      <Filter>camcommon</Filter>
+    </ClCompile>
+    <ClCompile Include="camcommon\searchpoint.cpp">
+      <Filter>camcommon</Filter>
+    </ClCompile>
+    <ClCompile Include="camcommon\skewdetect.cpp">
+      <Filter>camcommon</Filter>
+    </ClCompile>
+    <ClCompile Include="camcommon\squarecontour.cpp">
+      <Filter>camcommon</Filter>
+    </ClCompile>
+    <ClCompile Include="camcommon\thresholdfinder.cpp">
+      <Filter>camcommon</Filter>
+    </ClCompile>
+    <ClCompile Include="camcommon\util.cpp">
+      <Filter>camcommon</Filter>
+    </ClCompile>
+    <ClCompile Include="camcommon\videowriter.cpp">
+      <Filter>camcommon</Filter>
+    </ClCompile>
+    <ClCompile Include="camcommon\arqrcode.cpp">
+      <Filter>camcommon</Filter>
+    </ClCompile>
+    <ClCompile Include="camcommon\streamingreceiver.cpp">
+      <Filter>camcommon</Filter>
+    </ClCompile>
+    <ClCompile Include="camcommon\streamingsender.cpp">
+      <Filter>camcommon</Filter>
+    </ClCompile>
+    <ClCompile Include="camcommon\CameraDistortion.cpp">
+      <Filter>camcommon</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="common\container\vectorhelper.h">
+      <Filter>common\container</Filter>
+    </ClInclude>
+    <ClInclude Include="common\etc\autocs.h">
+      <Filter>common\etc</Filter>
+    </ClInclude>
+    <ClInclude Include="common\etc\config.h">
+      <Filter>common\etc</Filter>
+    </ClInclude>
+    <ClInclude Include="common\etc\dbg.h">
+      <Filter>common\etc</Filter>
+    </ClInclude>
+    <ClInclude Include="common\etc\genid.h">
+      <Filter>common\etc</Filter>
+    </ClInclude>
+    <ClInclude Include="common\etc\ip.h">
+      <Filter>common\etc</Filter>
+    </ClInclude>
+    <ClInclude Include="common\etc\observer.h">
+      <Filter>common\etc</Filter>
+    </ClInclude>
+    <ClInclude Include="common\etc\observer2.h">
+      <Filter>common\etc</Filter>
+    </ClInclude>
+    <ClInclude Include="common\etc\rand.h">
+      <Filter>common\etc</Filter>
+    </ClInclude>
+    <ClInclude Include="common\etc\singleton.h">
+      <Filter>common\etc</Filter>
+    </ClInclude>
+    <ClInclude Include="common\etc\stringfunc.h">
+      <Filter>common\etc</Filter>
+    </ClInclude>
+    <ClInclude Include="common\math\Math.h">
+      <Filter>common\math</Filter>
+    </ClInclude>
+    <ClInclude Include="common\math\mathutility.h">
+      <Filter>common\math</Filter>
+    </ClInclude>
+    <ClInclude Include="common\math\matrix44.h">
+      <Filter>common\math</Filter>
+    </ClInclude>
+    <ClInclude Include="common\math\plane.h">
+      <Filter>common\math</Filter>
+    </ClInclude>
+    <ClInclude Include="common\math\quaternion.h">
+      <Filter>common\math</Filter>
+    </ClInclude>
+    <ClInclude Include="common\math\ray.h">
+      <Filter>common\math</Filter>
+    </ClInclude>
+    <ClInclude Include="common\math\triangle.h">
+      <Filter>common\math</Filter>
+    </ClInclude>
+    <ClInclude Include="common\math\vector2.h">
+      <Filter>common\math</Filter>
+    </ClInclude>
+    <ClInclude Include="common\math\vector3.h">
+      <Filter>common\math</Filter>
+    </ClInclude>
+    <ClInclude Include="common\math\vector4.h">
+      <Filter>common\math</Filter>
+    </ClInclude>
+    <ClInclude Include="common\common.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="network\netlauncher.h">
+      <Filter>network</Filter>
+    </ClInclude>
+    <ClInclude Include="network\network.h">
+      <Filter>network</Filter>
+    </ClInclude>
+    <ClInclude Include="network\packetqueue.h">
+      <Filter>network</Filter>
+    </ClInclude>
+    <ClInclude Include="network\session.h">
+      <Filter>network</Filter>
+    </ClInclude>
+    <ClInclude Include="network\tcpclient.h">
+      <Filter>network</Filter>
+    </ClInclude>
+    <ClInclude Include="network\tcpserver.h">
+      <Filter>network</Filter>
+    </ClInclude>
+    <ClInclude Include="network\udpclient.h">
+      <Filter>network</Filter>
+    </ClInclude>
+    <ClInclude Include="network\udpserver.h">
+      <Filter>network</Filter>
+    </ClInclude>
+    <ClInclude Include="camcommon\arqrcode.h">
+      <Filter>camcommon</Filter>
+    </ClInclude>
+    <ClInclude Include="camcommon\camcommon.h">
+      <Filter>camcommon</Filter>
+    </ClInclude>
+    <ClInclude Include="camcommon\camera.h">
+      <Filter>camcommon</Filter>
+    </ClInclude>
+    <ClInclude Include="camcommon\config.h">
+      <Filter>camcommon</Filter>
+    </ClInclude>
+    <ClInclude Include="camcommon\detectpoint.h">
+      <Filter>camcommon</Filter>
+    </ClInclude>
+    <ClInclude Include="camcommon\detectrect.h">
+      <Filter>camcommon</Filter>
+    </ClInclude>
+    <ClInclude Include="camcommon\fps.h">
+      <Filter>camcommon</Filter>
+    </ClInclude>
+    <ClInclude Include="camcommon\LEDBlinkCapture.h">
+      <Filter>camcommon</Filter>
+    </ClInclude>
+    <ClInclude Include="camcommon\LEDCalibrater.h">
+      <Filter>camcommon</Filter>
+    </ClInclude>
+    <ClInclude Include="camcommon\linecontour.h">
+      <Filter>camcommon</Filter>
+    </ClInclude>
+    <ClInclude Include="camcommon\movie.h">
+      <Filter>camcommon</Filter>
+    </ClInclude>
+    <ClInclude Include="camcommon\pidcontrol.h">
+      <Filter>camcommon</Filter>
+    </ClInclude>
+    <ClInclude Include="camcommon\RecognitionConfig.h">
+      <Filter>camcommon</Filter>
+    </ClInclude>
+    <ClInclude Include="camcommon\recognitionedgeconfig.h">
+      <Filter>camcommon</Filter>
+    </ClInclude>
+    <ClInclude Include="camcommon\rectcontour.h">
+      <Filter>camcommon</Filter>
+    </ClInclude>
+    <ClInclude Include="camcommon\roi.h">
+      <Filter>camcommon</Filter>
+    </ClInclude>
+    <ClInclude Include="camcommon\screen.h">
+      <Filter>camcommon</Filter>
+    </ClInclude>
+    <ClInclude Include="camcommon\searchpoint.h">
+      <Filter>camcommon</Filter>
+    </ClInclude>
+    <ClInclude Include="camcommon\skewdetect.h">
+      <Filter>camcommon</Filter>
+    </ClInclude>
+    <ClInclude Include="camcommon\squarecontour.h">
+      <Filter>camcommon</Filter>
+    </ClInclude>
+    <ClInclude Include="camcommon\streaming.h">
+      <Filter>camcommon</Filter>
+    </ClInclude>
+    <ClInclude Include="camcommon\thresholdfinder.h">
+      <Filter>camcommon</Filter>
+    </ClInclude>
+    <ClInclude Include="camcommon\use_opencv.h">
+      <Filter>camcommon</Filter>
+    </ClInclude>
+    <ClInclude Include="camcommon\util.h">
+      <Filter>camcommon</Filter>
+    </ClInclude>
+    <ClInclude Include="camcommon\videowriter.h">
+      <Filter>camcommon</Filter>
+    </ClInclude>
+    <ClInclude Include="camcommon\streamingreceiver.h">
+      <Filter>camcommon</Filter>
+    </ClInclude>
+    <ClInclude Include="camcommon\streamingsender.h">
+      <Filter>camcommon</Filter>
+    </ClInclude>
+    <ClInclude Include="camcommon\CameraDistortion.h">
+      <Filter>camcommon</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="common">
+      <UniqueIdentifier>{051b80e4-bf4f-42d3-b2ad-9f5c99331023}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="common\container">
+      <UniqueIdentifier>{37610c70-18c0-4726-bc2a-c94155c68f7a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="common\etc">
+      <UniqueIdentifier>{bdb3d6ba-76d6-4236-b934-b8069b6362f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="common\math">
+      <UniqueIdentifier>{6f24800b-a8cc-43e3-ba04-a2f50974d9b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="network">
+      <UniqueIdentifier>{b3371534-bfb1-4f61-b348-4861b3306edd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="camcommon">
+      <UniqueIdentifier>{0c328849-6f5a-4ff7-b959-3e986b0f6c72}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
