@@ -237,4 +237,6 @@ _Pvt_Extensions
 
 # Ignore object files
 *.o
+*.gch
+
 
