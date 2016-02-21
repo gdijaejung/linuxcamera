@@ -2,9 +2,9 @@
 #include "../stdafx.h"
 #include "roi.h"
 #include <fstream>
-// #include <boost/property_tree/ptree.hpp>
-// #include <boost/property_tree/json_parser.hpp>
-// #include <boost/property_tree/xml_parser.hpp>
+#include <boost/property_tree/ptree.hpp>
+#include <boost/property_tree/json_parser.hpp>
+#include <boost/property_tree/xml_parser.hpp>
 
 using namespace cv;
 using namespace cvproc;
@@ -47,32 +47,32 @@ bool cRoi::Read(const string &fileName)
 	using namespace std;
 	cout << "read roi file... ";
 
-// 	try
-// 	{
-// 		// boost property tree
-// 		using boost::property_tree::ptree;
-// 		using std::string;
-// 		ptree props;
-// 		boost::property_tree::read_json(fileName, props);
-// 
-// 		if (props.get<string>("format", "") != "roi rect")
-// 		{
-// 			cout << "Fail " << endl;
-// 			return false;
-// 		}
-// 
-// 		m_rect.x = props.get<int>("x", 0);
-// 		m_rect.y = props.get<int>("y", 0);
-// 		m_rect.width = props.get<int>("width", 0);
-// 		m_rect.height = props.get<int>("height", 0);
-// 
-// 		cout << "Ok" << endl;
-// 	}
-// 	catch (std::exception&e)
-// 	{
-// 		cout << "Fail " << e.what() << endl;
-// 		return false;
-// 	}
+	try
+	{
+		// boost property tree
+		using boost::property_tree::ptree;
+		using std::string;
+		ptree props;
+		boost::property_tree::read_json(fileName, props);
+
+		if (props.get<string>("format", "") != "roi rect")
+		{
+			cout << "Fail " << endl;
+			return false;
+		}
+
+		m_rect.x = props.get<int>("x", 0);
+		m_rect.y = props.get<int>("y", 0);
+		m_rect.width = props.get<int>("width", 0);
+		m_rect.height = props.get<int>("height", 0);
+
+		cout << "Ok" << endl;
+	}
+	catch (std::exception&e)
+	{
+		cout << "Fail " << e.what() << endl;
+		return false;
+	}
 
 	return true;
 }
@@ -86,27 +86,27 @@ bool cRoi::Write(const string &fileName)
 	if (fileName.empty())
 		return false;
 
-// 	try
-// 	{
-// 		// boost property tree
-// 		using boost::property_tree::ptree;
-// 		using std::string;
-// 		ptree props;
-// 
-// 		props.add<string>("format", "roi rect");
-// 
-// 		props.add<int>("x", m_rect.x);
-// 		props.add<int>("y", m_rect.y);
-// 		props.add<int>("width", m_rect.width);
-// 		props.add<int>("height", m_rect.height);
-// 
-// 		boost::property_tree::write_json(fileName, props);
-// 	}
-// 	catch (std::exception&e)
-// 	{
-// 		cout << "Fail " << e.what() << endl;
-// 		return false;
-// 	}
+	try
+	{
+		// boost property tree
+		using boost::property_tree::ptree;
+		using std::string;
+		ptree props;
+
+		props.add<string>("format", "roi rect");
+
+		props.add<int>("x", m_rect.x);
+		props.add<int>("y", m_rect.y);
+		props.add<int>("width", m_rect.width);
+		props.add<int>("height", m_rect.height);
+
+		boost::property_tree::write_json(fileName, props);
+	}
+	catch (std::exception&e)
+	{
+		cout << "Fail " << e.what() << endl;
+		return false;
+	}
 
 	return true;
 }

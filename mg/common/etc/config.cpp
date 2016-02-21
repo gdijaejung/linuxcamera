@@ -1,9 +1,7 @@
 
-//#include "stdafx.h"
-// #include "../common.h"
-// #include "config.h"
-// #include <set>
 #include "../../stdafx.h"
+#include "config.h"
+
 
 using namespace common;
 using namespace std;

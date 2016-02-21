@@ -33,8 +33,6 @@ void cObservable2::RemoveObserver(iObserver2* observer)
 
 void cObservable2::NotifyObserver(int type)// type=0
 {
-// 	BOOST_FOREACH (auto &observer, m_observers)
-// 		observer->Update(type);
 	for (auto &observer : m_observers)
 		observer->Update(type);
 }

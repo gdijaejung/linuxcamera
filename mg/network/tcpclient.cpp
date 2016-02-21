@@ -56,7 +56,6 @@ bool cTCPClient::Init(const string &ip, const int port,
 		m_threadLoop = true;
 		if (!m_handle)
 		{
-			//m_handle = (HANDLE)_beginthreadex(NULL, 0, TCPClientThreadFunction, this, 0, (unsigned*)&m_threadId);
 			pthread_create(&m_handle, NULL, TCPClientThreadFunction, this);
 		}
 	}

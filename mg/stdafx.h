@@ -7,3 +7,5 @@
 #include "common/common.h"
 #include "network/network.h"
 #include "camcommon/camcommon.h"
+#include "mgcommon/mgcommon.h"
+

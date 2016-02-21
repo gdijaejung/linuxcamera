@@ -14,7 +14,8 @@ camcommon/CameraDistortion.o camcommon/camera.o \
 camcommon/squarecontour.o camcommon/roi.o camcommon/screen.o camcommon/pidcontrol.o \
 camcommon/skewdetect.o camcommon/streamingsender.o camcommon/streamingreceiver.o \
 camcommon/searchpoint.o camcommon/thresholdfinder.o camcommon/LEDCalibrater.o \
-camcommon/videowriter.o camcommon/movie.o\
+camcommon/videowriter.o camcommon/movie.o \
+mgcommon/mgclient.o \
 stdafx.o main.o
 SRCS = $(OBJECTS:.o=.cpp)
 

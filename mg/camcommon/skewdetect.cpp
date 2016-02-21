@@ -1,10 +1,9 @@
 
 #include "../stdafx.h"
 #include "skewdetect.h"
-//#include <fstream>
-// #include <boost/property_tree/ptree.hpp>
-// #include <boost/property_tree/json_parser.hpp>
-// #include <boost/property_tree/xml_parser.hpp>
+#include <boost/property_tree/ptree.hpp>
+#include <boost/property_tree/json_parser.hpp>
+#include <boost/property_tree/xml_parser.hpp>
 
 using namespace std;
 using namespace cv;
@@ -154,52 +153,52 @@ bool cSkewDetect::Read(const string &contourFileName, const bool createContourSi
 {
 	cout << "read SkewDetect file... ";
 
-// 	try
-// 	{
-// 		// boost property tree
-// 		using boost::property_tree::ptree;
-// 		using std::string;
-// 		ptree props;
-// 		boost::property_tree::read_json(contourFileName, props);
-// 
-// 		if (props.get<string>("format", "") != "camera contour")
-// 		{
-// 			cout << "Fail " << endl;
-// 			return false;
-// 		}
-// 
-// 		float scale;
-// 		cRectContour contour;
-// 		vector<Point2f> pos(4);
-// 
-// 		scale = props.get<float>("scale", 1);
-// 		pos[0].x = props.get<float>("pos1x", 1);
-// 		pos[0].y = props.get<float>("pos1y", 1);
-// 		pos[1].x = props.get<float>("pos2x", 1);
-// 		pos[1].y = props.get<float>("pos2y", 1);
-// 		pos[2].x = props.get<float>("pos3x", 1);
-// 		pos[2].y = props.get<float>("pos3y", 1);
-// 		pos[3].x = props.get<float>("pos4x", 1);
-// 		pos[3].y = props.get<float>("pos4y", 1);
-// 
-// 		contour.Init(pos);
-// 
-// 		int width = m_skewBkgnd.empty() ? m_cols : m_skewBkgnd.cols;
-// 		int height = m_skewBkgnd.empty() ? m_rows : m_skewBkgnd.rows;
-// 		if (createContourSize)
-// 		{
-// 			width = contour.Width();
-// 			height = contour.Height();
-// 		}
-// 
-// 		Init(contour, scale, width, height);
-// 
-// 		cout << "Ok" << endl;
-// 	}
-// 	catch (std::exception&e)
-// 	{
-// 		cout << "Fail " << e.what() << endl;
-// 	}
+	try
+	{
+		// boost property tree
+		using boost::property_tree::ptree;
+		using std::string;
+		ptree props;
+		boost::property_tree::read_json(contourFileName, props);
+
+		if (props.get<string>("format", "") != "camera contour")
+		{
+			cout << "Fail " << endl;
+			return false;
+		}
+
+		float scale;
+		cRectContour contour;
+		vector<Point2f> pos(4);
+
+		scale = props.get<float>("scale", 1);
+		pos[0].x = props.get<float>("pos1x", 1);
+		pos[0].y = props.get<float>("pos1y", 1);
+		pos[1].x = props.get<float>("pos2x", 1);
+		pos[1].y = props.get<float>("pos2y", 1);
+		pos[2].x = props.get<float>("pos3x", 1);
+		pos[2].y = props.get<float>("pos3y", 1);
+		pos[3].x = props.get<float>("pos4x", 1);
+		pos[3].y = props.get<float>("pos4y", 1);
+
+		contour.Init(pos);
+
+		int width = m_skewBkgnd.empty() ? m_cols : m_skewBkgnd.cols;
+		int height = m_skewBkgnd.empty() ? m_rows : m_skewBkgnd.rows;
+		if (createContourSize)
+		{
+			width = contour.Width();
+			height = contour.Height();
+		}
+
+		Init(contour, scale, width, height);
+
+		cout << "Ok" << endl;
+	}
+	catch (std::exception&e)
+	{
+		cout << "Fail " << e.what() << endl;
+	}
 
 	return true;
 }
@@ -213,31 +212,31 @@ bool cSkewDetect::Write(const string &contourFileName)
 	if (contourFileName.empty())
 		return false;
 
-// 	try
-// 	{
-// 		// boost property tree
-// 		using boost::property_tree::ptree;
-// 		using std::string;
-// 		ptree props;
-// 
-// 		props.add<string>("format", "camera contour");
-// 
-// 		props.add<float>("scale", m_scale);
-// 		props.add<int>("pos1x", m_contour.m_contours[0].x);
-// 		props.add<int>("pos1y", m_contour.m_contours[0].y);
-// 		props.add<int>("pos2x", m_contour.m_contours[1].x);
-// 		props.add<int>("pos2y", m_contour.m_contours[1].y);
-// 		props.add<int>("pos3x", m_contour.m_contours[2].x);
-// 		props.add<int>("pos3y", m_contour.m_contours[2].y);
-// 		props.add<int>("pos4x", m_contour.m_contours[3].x);
-// 		props.add<int>("pos4y", m_contour.m_contours[3].y);
-// 
-// 		boost::property_tree::write_json(contourFileName, props);
-// 	}
-// 	catch (std::exception&e)
-// 	{
-// 		cout << "Fail " << e.what() << endl;
-// 	}
+	try
+	{
+		// boost property tree
+		using boost::property_tree::ptree;
+		using std::string;
+		ptree props;
+
+		props.add<string>("format", "camera contour");
+
+		props.add<float>("scale", m_scale);
+		props.add<int>("pos1x", m_contour.m_contours[0].x);
+		props.add<int>("pos1y", m_contour.m_contours[0].y);
+		props.add<int>("pos2x", m_contour.m_contours[1].x);
+		props.add<int>("pos2y", m_contour.m_contours[1].y);
+		props.add<int>("pos3x", m_contour.m_contours[2].x);
+		props.add<int>("pos3y", m_contour.m_contours[2].y);
+		props.add<int>("pos4x", m_contour.m_contours[3].x);
+		props.add<int>("pos4y", m_contour.m_contours[3].y);
+
+		boost::property_tree::write_json(contourFileName, props);
+	}
+	catch (std::exception&e)
+	{
+		cout << "Fail " << e.what() << endl;
+	}
 
 	return true;
 }
