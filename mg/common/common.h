@@ -132,4 +132,5 @@ using std::wstringstream;
 // #include "etc/BufferedSerial.h"
 // #include "etc/SerialAsync.h"
 // #include "etc/ip.h"
-// 
+#include "etc/util.h"
+

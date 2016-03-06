@@ -303,16 +303,13 @@ void cMGClient::RcvReqSetMGConfig(const mgnetwork::sSC_ReqSetMGConfig &mgConfig)
 	// 환경설정 파일 정보가 바뀌면, 스트리밍 옵션이 바꼈는지 확인한다.
 	static bool firstCode = true;
 
-	static string ip = mgConfig.config.stream_send_ip;
-	static int port = mgConfig.config.stream_send_port;
-	static bool udp = mgConfig.config.stream_send_udp;
+	static int serverPort = mgConfig.config.stream_server_port;
 	static bool gray = mgConfig.config.stream_send_gray;
 	static bool compressed = mgConfig.config.stream_send_compressed;
 	static int quality = mgConfig.config.streaming_send_quality;
 
-	const bool checkChange = (udp != mgConfig.config.stream_send_udp) ||
-		(ip != mgConfig.config.stream_send_ip) ||
-		(port != mgConfig.config.stream_send_port) ||
+	const bool checkChange =
+		(serverPort != mgConfig.config.stream_server_port) ||
 		(gray != mgConfig.config.stream_send_gray) ||
 		(compressed != mgConfig.config.stream_send_compressed) ||
 		(quality != mgConfig.config.streaming_send_quality);
@@ -322,13 +319,6 @@ void cMGClient::RcvReqSetMGConfig(const mgnetwork::sSC_ReqSetMGConfig &mgConfig)
 	{
 		firstCode = false;
 
-// 		string ip = mgConfig.config.stream_send_ip;
-// 		int port = mgConfig.config.stream_send_port;
-// 		bool udp = mgConfig.config.stream_send_udp;
-// 		bool gray = mgConfig.config.stream_send_gray;
-// 		bool compressed = mgConfig.config.stream_send_compressed;
-// 		int quality = mgConfig.config.streaming_send_quality;
-	
 		// 정보가 바꼈다면, true 체크
 		g_config.m_changeStreamingOption = true;
 	}

@@ -119,6 +119,7 @@
     <ClCompile Include="common\math\vector3.cpp" />
     <ClCompile Include="common\math\vector4.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="mgcommon\mgclient.cpp" />
     <ClCompile Include="network\netlauncher.cpp" />
     <ClCompile Include="network\network.cpp" />
     <ClCompile Include="network\packetqueue.cpp" />
@@ -180,6 +181,11 @@
     <ClInclude Include="common\math\vector2.h" />
     <ClInclude Include="common\math\vector3.h" />
     <ClInclude Include="common\math\vector4.h" />
+    <ClInclude Include="mgcommon\machinegunglobal.h" />
+    <ClInclude Include="mgcommon\mgclient.h" />
+    <ClInclude Include="mgcommon\mgcommon.h" />
+    <ClInclude Include="mgcommon\mgnetwork.h" />
+    <ClInclude Include="mgcommon\mgudpprotocol.h" />
     <ClInclude Include="network\netlauncher.h" />
     <ClInclude Include="network\network.h" />
     <ClInclude Include="network\packetqueue.h" />

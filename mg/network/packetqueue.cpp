@@ -144,8 +144,9 @@ void cPacketQueue::Push(const SOCKET sock, const BYTE *data, const int len,
 
 bool cPacketQueue::Front(OUT sPacket &out)
 {
- 	cAutoCS cs(m_criticalSection);
  	RETV(m_queue.empty(), false);
+
+	cAutoCS cs(m_criticalSection);
  	RETV(!m_queue[0].full, false);
 
 	out.sock = m_queue[0].sock;

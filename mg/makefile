@@ -6,6 +6,7 @@ TARGET = mgcamera
 OBJECTS = common/math/vector2.o common/math/vector3.o common/math/vector4.o common/math/matrix44.o \
 common/math/quaternion.o common/math/triangle.o common/math/plane.o common/math/ray.o common/etc/stringfunc.o \
 common/etc/observer.o common/etc/observer2.o common/etc/genid.o common/etc/config.o \
+common/etc/util.o \
 network/network.o network/session.o network/packetqueue.o network/tcpserver.o network/tcpclient.o \
 network/udpclient.o network/udpserver.o network/netlauncher.o \
 camcommon/util.o camcommon/linecontour.o  camcommon/config.o camcommon/RecognitionConfig.o \

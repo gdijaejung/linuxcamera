@@ -14,24 +14,25 @@ namespace cvproc
 		cCamera();
 		virtual ~cCamera();
 
-		bool Init(const int index=0, const cv::Size &resolution=cv::Size(640,480));
+		bool Init(const int index=0, const cv::Size &resolution=cv::Size(640,480), const bool isThread = true);
 		bool Init(const string &fileName, const cv::Size &resolution = cv::Size(640, 480));
-		IplImage* GetCapture();
+		cv::Mat& GetCapture();
+		cv::Mat& GetCaptureThreadSafe();
 		cv::Mat& GetCaptureUndistortion();
 		cv::Mat& GetCaptureUndistortion(cv::Mat &src);
 		cv::Mat& GetMovieCapture();
 	
-		IplImage* ShowCapture();
+		cv::Mat& ShowCapture();
 		cv::Mat& ShowCaptureUndistortion();
 		cv::Mat& ShowCaptureUndistortion(const cv::Mat &skewTransform, OUT cv::Mat &dst);
 		const cv::Size& Resolution() const;
 
-
-	protected:
+	public:
 		bool m_show;
 		bool m_showFrame;
 		CvCapture* m_capture;
 		cv::Mat m_undistortCapture;
+		cv::Mat m_camImage;
 		CameraDistortion m_camDistort;
 		cv::Size m_resolution; // 카메라 해상도
 		cv::Mat m_movieImage;
@@ -42,6 +43,11 @@ namespace cvproc
 		int m_oldTime;
 		int m_incTime;
 		int m_fps;
+
+		// thread
+		pthread_t m_handle;
+		pthread_mutex_t m_CriticalSection;
+		bool m_threadLoop;
 	};
 
 	inline const cv::Size& cCamera::Resolution() const { return m_resolution;  }

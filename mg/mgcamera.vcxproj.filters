@@ -147,6 +147,12 @@
     <ClCompile Include="camcommon\CameraDistortion.cpp">
       <Filter>camcommon</Filter>
     </ClCompile>
+    <ClCompile Include="mgcommon\mgclient.cpp">
+      <Filter>mgcommon</Filter>
+    </ClCompile>
+    <ClCompile Include="common\etc\util.cpp">
+      <Filter>common\etc</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -324,6 +330,24 @@
     <ClInclude Include="camcommon\CameraDistortion.h">
       <Filter>camcommon</Filter>
     </ClInclude>
+    <ClInclude Include="mgcommon\mgcommon.h">
+      <Filter>mgcommon</Filter>
+    </ClInclude>
+    <ClInclude Include="mgcommon\mgnetwork.h">
+      <Filter>mgcommon</Filter>
+    </ClInclude>
+    <ClInclude Include="mgcommon\mgudpprotocol.h">
+      <Filter>mgcommon</Filter>
+    </ClInclude>
+    <ClInclude Include="mgcommon\machinegunglobal.h">
+      <Filter>mgcommon</Filter>
+    </ClInclude>
+    <ClInclude Include="mgcommon\mgclient.h">
+      <Filter>mgcommon</Filter>
+    </ClInclude>
+    <ClInclude Include="common\etc\util.h">
+      <Filter>common\etc</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="common">
@@ -343,6 +367,9 @@
     </Filter>
     <Filter Include="camcommon">
       <UniqueIdentifier>{0c328849-6f5a-4ff7-b959-3e986b0f6c72}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="mgcommon">
+      <UniqueIdentifier>{abfeaee5-de86-4050-acd0-2a0adf792f2d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

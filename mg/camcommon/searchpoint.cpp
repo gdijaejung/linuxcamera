@@ -7,16 +7,28 @@ using namespace cv;
 using namespace cvproc;
 
 
+void* SearchPointThreadFunction(void* arg);
+
+
 cSearchPoint::cSearchPoint(const int id)
-	: m_detectPoint(common::format("BinaryWindow%d", id))
+	: m_isSkewTransform(true)
+	, m_isRoi(false)
+	, m_detectPoint(common::format("BinaryWindow%d", id))
 	, m_maxDiffCount(0)
 	, m_skewWidth(0)
 	, m_skewHeight(0)
 	, m_oldRawPos(0,0)
 	, m_show(false)
+	, m_handle(0)
+	, m_threadLoop(true)
+	, m_sleepMillis(10)
+	, m_isBusy(false)
+	, m_isUpdatePos(false)
+	, m_isUpdateParam(false)
 {
 	m_show = g_config.m_conf.showDetectPoint;
 	m_windowName = common::format("SkewWindow%d", id);
+	pthread_mutex_init(&m_CriticalSection, NULL);
 
 	if (m_show)
 	{
@@ -28,10 +40,20 @@ cSearchPoint::cSearchPoint(const int id)
 
 cSearchPoint::~cSearchPoint()
 {
+	pthread_mutex_destroy(&m_CriticalSection);
+
+	if (m_handle)
+	{
+		m_threadLoop = false;
+		pthread_join(m_handle, NULL);
+		m_handle = 0;
+	}
 }
 
 
-bool cSearchPoint::Init(const string &recognitionConfigFile, const string &contourConfigFile, const string &roiFile)
+bool cSearchPoint::Init(const string &recognitionConfigFile, const string &contourConfigFile, const string &roiFile,
+	const bool isSkewTransform, const bool isRoi, const bool isThread)
+// isSkewTransform=true, isRoi=false, isThread=false
 {
 	if (!m_recogConfig.Read(recognitionConfigFile))
 		return false;
@@ -42,11 +64,27 @@ bool cSearchPoint::Init(const string &recognitionConfigFile, const string &conto
 	if (!m_roi.Read(roiFile))
 		return false;
 
+	m_isSkewTransform = isSkewTransform;
+	m_isRoi = isRoi;
 	m_detectPoint.UpdateParam(m_recogConfig);
 
 	Size size(m_skewDetect.m_contour.Width(), m_skewDetect.m_contour.Height());
 	m_skewWidth = m_skewDetect.m_contour.Width();
 	m_skewHeight = m_skewDetect.m_contour.Height();
+
+	if (isThread)
+	{
+		// if  thread is running, finish
+		if (m_handle)
+		{
+			m_threadLoop = false;
+			pthread_join(m_handle, NULL);
+			m_handle = 0;
+		}
+
+		m_threadLoop = true;
+		pthread_create(&m_handle, NULL, SearchPointThreadFunction, this);
+	}
 
 	m_skewDetect.m_skewBkgnd.create(size, CV_8UC(3));	
 	return true;
@@ -74,6 +112,43 @@ bool cSearchPoint::ReadContourFile(const string &contourConfigFile)
 
 	m_skewDetect.m_skewBkgnd.create(size, CV_8UC(3));
 	return true;
+}
+
+
+bool cSearchPoint::IsBusy()
+{
+	return m_isBusy;
+}
+
+
+// 계산 정보가 업데이트 되었다면, true를 리턴한다.
+// 속도를 높이기위해, 동기화 객체를 쓰지 않았다.
+bool cSearchPoint::Update(const cv::Mat &src, OUT cv::Point &rawPos)
+{
+	if (m_isBusy)
+	{
+		rawPos = m_oldRawPos;
+		return false;
+	}
+	else
+	{
+		const bool reval = m_isUpdatePos;
+		rawPos = m_oldRawPos;
+
+		if (m_srcClone.empty())
+		{
+			m_srcClone = src.clone();
+		}
+		else
+		{
+			memcpy(m_srcClone.data, src.data, src.step*src.rows);
+		}
+
+		m_isUpdateParam = true;
+		return reval;
+	}
+
+	return false;
 }
 
 
@@ -222,4 +297,32 @@ void cSearchPoint::ConvertUV(const Point &pos, OUT float &outX, OUT float &outY)
 
 	outX = x;
 	outY = y;
+}
+
+
+void* SearchPointThreadFunction(void* arg)
+{
+	cSearchPoint *searchPoint = (cSearchPoint*)arg;
+
+	while (searchPoint->m_threadLoop)
+	{
+		if (!searchPoint->m_isUpdateParam)
+		{
+			sleep_ms(searchPoint->m_sleepMillis);
+			continue;
+		}
+
+		searchPoint->m_isBusy = true;
+		searchPoint->m_isUpdatePos = false;
+
+		cv::Point out;
+		searchPoint->RecognitionSearch(searchPoint->m_srcClone, out,
+			searchPoint->m_isSkewTransform, searchPoint->m_isRoi);
+
+		searchPoint->m_isUpdateParam = false;
+		searchPoint->m_isUpdatePos = true;
+		searchPoint->m_isBusy = false;
+	}
+
+	return 0;
 }

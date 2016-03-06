@@ -17,11 +17,8 @@ struct sCameraConfig
 	bool showCameraFrame;
 	bool showCameraThreadFrame;
 
-	bool stream_player1_enable;
-	bool stream_player2_enable;
-	char stream_send_ip[16];
-	int stream_send_port;
-	bool stream_send_udp;
+	int stream_player; // -1,0,1,
+	int stream_server_port;
 	bool stream_send_gray;
 	bool stream_send_compressed;
 	int streaming_send_quality;
@@ -36,7 +33,6 @@ struct sCameraConfig
 	char monitor_ip[16];
 	int monitor_port;
 };
-
 
 
 class cCamConfig
