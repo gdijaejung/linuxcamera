@@ -155,6 +155,8 @@ bool cSearchPoint::Update(const cv::Mat &src, OUT cv::Point &rawPos)
 bool cSearchPoint::RecognitionSearch(const Mat &src, OUT Point &rawPos, const bool isSkewTransform, const bool isRoi)
 // isSkewTransform=true, isRoi=false
 {
+	using namespace std;
+
 	if (src.empty())
 		return false;
 
@@ -183,6 +185,11 @@ bool cSearchPoint::RecognitionSearch(const Mat &src, OUT Point &rawPos, const bo
 		cLineContour bestLine;
 		int minimumLenght = 0;
 		vector<Point> detectPoints = m_detectPoint.GetDetectPoints();
+		if (detectPoints.size() < 3)
+		{
+			//std::cout << "not detect 3 point = " << detectPoints.size() << std::endl;
+			return false;
+		}
 
 		// 그전 포인터와 가장 근접한 포인트를 찾는다.
 		while (1 && (loopCnt < m_recogConfig.m_attr.detectPointLoopCount))
@@ -282,13 +289,13 @@ bool cSearchPoint::RecognitionSearch(const Mat &src, OUT Point &rawPos, const bo
 //  |(0,0)         |(1,0)
 //  +--------------+
 //
-void cSearchPoint::ConvertUV(const Point &pos, OUT float &outX, OUT float &outY)
+void cSearchPoint::ConvertUV(const cv::Point &pos, OUT float &outX, OUT float &outY)
 {
 	if ((m_skewWidth == 0) || (m_skewHeight == 0))
 		return;
 
-	float x = pos.x / (float)m_skewWidth;
-	float y = 1.f - (pos.y / (float)m_skewHeight);
+	float x = (float)pos.x / (float)m_skewWidth;
+	float y = 1.f - ((float)pos.y / (float)m_skewHeight);
 	x = (x - 0.5f) * m_skewDetect.m_scale + 0.5f;
 	y = (y - 0.5f) * m_skewDetect.m_scale + 0.5f;
 
@@ -315,8 +322,7 @@ void* SearchPointThreadFunction(void* arg)
 		searchPoint->m_isBusy = true;
 		searchPoint->m_isUpdatePos = false;
 
-		cv::Point out;
-		searchPoint->RecognitionSearch(searchPoint->m_srcClone, out,
+		searchPoint->RecognitionSearch(searchPoint->m_srcClone, searchPoint->m_oldRawPos,
 			searchPoint->m_isSkewTransform, searchPoint->m_isRoi);
 
 		searchPoint->m_isUpdateParam = false;

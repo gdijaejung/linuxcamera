@@ -53,7 +53,7 @@ int main(int argc, char **argv)
 // 	}
 // 
 
-//	cMGStandUDPComm standUdpComm;
+	network::cUDPClient standUdpComm;
  	cvproc::cStreamingSender streamSender;
  	cMGClient mgClient; // 개발자용 네트워크 통신 객체
  	mgClient.Init(&searchPoint1, &searchPoint2);
@@ -71,24 +71,14 @@ int main(int argc, char **argv)
 		cout << "----- MGClient Client Mode -----" << endl;
 	}
 
-// 	if (mgGameType == MG_TYPE::STAND)
-// 	{
-// 		if (!standUdpComm.Init(g_config.m_udpClientConnectIp, g_config.m_udpClientConnectPort))
-// 		{
-// 			cout << "udp client connect Error!!" << endl;
-// 			cout << "press enter to exit program" << endl;
-// 			getchar();
-// 			return;
-// 		}
-// 	}
-// 	else
-// 	{
-// 		cout << "undefined project name";
-// 		cout << "press enter to exit program" << endl;
-// 		getchar();
-// 		return;
-// 	}
-// 
+
+	if (!standUdpComm.Init(g_config.m_udpClientConnectIp, g_config.m_udpClientConnectPort))
+	{
+		cout << "udp client connect Error!!" << endl;
+		cout << "press enter to exit program" << endl;
+		getchar();
+		return 0;
+	}
 
 
 	if (!streamSender.Init(g_config.m_conf.stream_server_port,
@@ -119,7 +109,7 @@ int main(int argc, char **argv)
 	int fpsTime = 0;
 	float disp_x1 = 0, disp_y1 = 0;
 	float disp_x2 = 0, disp_y2 = 0;
-	Point detectRawPos1(0, 0), detectRawPos2(0, 0);
+	cv::Point detectRawPos1(0, 0), detectRawPos2(0, 0);
 
 	cout << "Start Camera Loop" << endl;
 
@@ -170,13 +160,19 @@ int main(int argc, char **argv)
 		}
  
 		Mat src1(capture1.GetCapture());
+//		Mat src1(capture1.ShowCapture());
 // 		Mat src2(dxCapture2.GetCloneBufferToImage());
 		Mat src2 = src1.clone();
 
+		// debug
+//		searchPoint1.m_detectPoint.m_makeKeypointImage = true;
+
 		//-------------------------------------------------------------------------
 		// IR LED Detect
-// 		searchPoint1.RecognitionSearch(src1, detectRawPos1, true, true);
-// 		searchPoint2.RecognitionSearch(src2, detectRawPos2, true, true);
+// 		if (searchPoint1.RecognitionSearch(src1, detectRawPos1, true, true))
+// 			++calcPoint1;
+// 		if (searchPoint2.RecognitionSearch(src2, detectRawPos2, true, true))
+// 			++calcPoint2;
 		if (searchPoint1.Update(src1, detectRawPos1))
 			++calcPoint1;
 		if (searchPoint2.Update(src2, detectRawPos2))
@@ -204,6 +200,21 @@ int main(int argc, char **argv)
 		disp_y2 = pos2.y;
  		//------------------------------------------------------------------------
 
+		SMGCameraData packet;
+		packet.x1 = disp_x1;
+		packet.y1 = disp_y1;
+		packet.x2 = disp_x2;
+		packet.y2 = disp_y2; // 총이 가르키는 위치 0 ~ 1 사이 값. 화면의 왼쪽 아래가 {0,0}
+
+		standUdpComm.SendData((BYTE*)&packet, sizeof(packet));
+
+//		cout << "detectRawPos1 =  " << detectRawPos1.x << ", " << detectRawPos1.y << ", disp_xy1 = " << disp_x1 << ", " << disp_y1 << endl;
+
+		if (!searchPoint1.m_detectPoint.m_binWithKeypoints.empty())
+			imshow("keypoints", searchPoint1.m_detectPoint.m_binWithKeypoints);
+
+
+		//------------------------------------------------------------------------
 		// Monitor Networking
 		mgClient.Update();
 

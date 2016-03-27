@@ -21,6 +21,14 @@ cStreamingSender::cStreamingSender()
 cStreamingSender::~cStreamingSender()
 {
 	SAFE_DELETEA(m_sndBuffer);
+
+	for (auto &usr : m_users)
+	{
+		cout << "streamingsender close " << usr.first << endl;
+		close(usr.first);
+	}
+
+	m_users.clear();
 }
 
 

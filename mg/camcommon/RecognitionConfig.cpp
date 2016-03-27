@@ -97,7 +97,5 @@ bool cRecognitionConfig::Write(const string &fileName)
 	m_options["detect_line_min_pos_distance"] = common::format("%f", m_attr.detectLineMinDiffDistance);
 	m_options["thresholdfinder_offset"] = common::format("%d", m_attr.thresholdFinderOffset);
 
-	cConfig::Write(fileName);
-
-	return true;
+	return cConfig::Write(fileName);
 }

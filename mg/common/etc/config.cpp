@@ -165,9 +165,13 @@ bool cConfig::Write(const string &fileName)
 {
  	using namespace std;
 
+	//cout << "cConfig::Write() = " << fileName << endl;
+
 	ifstream cfgfile(fileName);
 	if (!cfgfile.is_open())
 	{
+		//cout << "not exist file, and create new file = " << fileName << endl;
+
 		// 동일한 파일이 없다면, 그대로 저장하고 종료한다.
 		ofstream ofs(fileName);
 		if (!ofs.is_open())
@@ -184,10 +188,13 @@ bool cConfig::Write(const string &fileName)
 	}
 
 
+	//cout << "exist file, update file = " << fileName << endl;
+
 	set<string> checkId; //저장 된 정보와 그렇지 않은 정보를 찾기위해 필요함.
 
 	stringstream ss;
 	ss << cfgfile.rdbuf();
+
 
 	stringstream savess;
 	char line[128];
@@ -213,9 +220,15 @@ bool cConfig::Write(const string &fileName)
 		if (eq != "=") throw std::runtime_error("Parse error");
 
 		if (m_options[id].empty())
+		{
+			//cout << "not found id = " << id << endl;
 			savess << id << " = " << 0 << endl;
+		}
 		else
+		{
+			//cout << "found id = " << id << endl;
 			savess << id << " = " << m_options[id] << endl;
+		}
 
 		checkId.insert(id);
 	}

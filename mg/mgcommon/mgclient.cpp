@@ -355,16 +355,21 @@ void cMGClient::RcvReqSetCameraContour(const mgnetwork::sSC_ReqSetCameraContour 
 
 void cMGClient::RcvReqSetCameraRecognitionConfig(const mgnetwork::sSC_ReqSetCameraRecognitionConfig &recogConfig)
 {
+	cout << "RcvReqSetCameraRecognitionConfig" << endl;
+
 	if ((recogConfig.playerIndex == 0) || (recogConfig.playerIndex == 1))
 	{
 		if (m_searchPoint[recogConfig.playerIndex])
 		{
-			memcpy(&m_searchPoint[recogConfig.playerIndex]->m_recogConfig.m_attr, 
+			memcpy(&m_searchPoint[recogConfig.playerIndex]->m_recogConfig.m_attr,
 				&recogConfig.config, sizeof(recogConfig.config));
 
 			// 설정파일이 업데이트 되면, 파일에 저장한다.
-			m_searchPoint[recogConfig.playerIndex]->m_recogConfig.Write(
-				(recogConfig.playerIndex == 0) ? g_recognition_configfilename1 : g_recognition_configfilename2);
+			if (!m_searchPoint[recogConfig.playerIndex]->m_recogConfig.Write(
+				(recogConfig.playerIndex == 0) ? g_recognition_configfilename1 : g_recognition_configfilename2))
+			{
+				cout << "Error Write CameraRecognitionConfig file" << endl;
+			}
 		}
 	}
 }

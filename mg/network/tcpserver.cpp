@@ -24,6 +24,8 @@ cTCPServer::cTCPServer()
 
 cTCPServer::~cTCPServer()
 {
+	printf("cTCPServer::terminator\n");
+
 	Close();
 
 	pthread_mutex_destroy(&m_criticalSection);
@@ -90,11 +92,22 @@ void cTCPServer::Close()
  		m_handle = 0;
  	}
 
+	for (auto &cli : m_sessions)
+	{
+		cout << "session shutdown " << cli.socket;
+		const int reval = shutdown(cli.socket, SHUT_RDWR);
+		cout << ", close()=" << reval << endl;
+	}
+	m_sessions.clear();
+
 	if (m_svrSocket != INVALID_SOCKET)
 	{
-		close(m_svrSocket);
+		cout << "server sock shutdown port=" << m_port << ", sock=" << m_svrSocket;
+		const int reval = shutdown(m_svrSocket, SHUT_RDWR);
+		cout << ", close()=" << reval << endl;
 		m_svrSocket = INVALID_SOCKET;
 	}
+
 }
 
 

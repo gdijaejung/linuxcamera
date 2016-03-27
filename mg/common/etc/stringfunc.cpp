@@ -4,6 +4,8 @@
 // #include "stringfunc.h"
 #include "../../stdafx.h"
 #include "stringfunc.h"
+#include <stdarg.h>
+
 
 void common::replaceAll(std::string& str, const std::string& from, const std::string& to) {
 	if(from.empty())
@@ -96,11 +98,11 @@ string& common::trim(string &str)
 string common::format(const char* fmt, ...)
 {
 	char textString[ 256] = {'\0'};
-// 	va_list args;
-// 	va_start ( args, fmt );
-// 	//vsnprintf( textString, sizeof(textString), _TRUNCATE, fmt, args );
-// 	vsprintf(textString, fmt, args);
-// 	va_end ( args );
+ 	va_list args;
+ 	va_start ( args, fmt );
+ 	//vsnprintf( textString, sizeof(textString), _TRUNCATE, fmt, args );
+ 	vsprintf(textString, fmt, args);
+ 	va_end ( args );
 	return textString;
 }
 

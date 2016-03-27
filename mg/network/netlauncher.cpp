@@ -3,7 +3,7 @@
 #include "netlauncher.h"
 
 using namespace network;
-
+using namespace std;
 
 //------------------------------------------------------------------------
 // 
@@ -56,6 +56,13 @@ bool network::LaunchServer(const int port, OUT SOCKET &out)
 		return false;
 	}
 
+
+	// http://forum.falinux.com/zbxe/index.php?document_srl=406056&mid=network_programming
+	// bind() error 제거를 위해 사용함.
+	const int option = 1;          // SO_REUSEADDR 의 옵션 값을 TRUE 로
+	setsockopt(ssock, SOL_SOCKET, SO_REUSEADDR, &option, sizeof(option));
+
+
 	struct sockaddr_in server_addr;
 	bzero(&server_addr, sizeof(server_addr));
 	server_addr.sin_family = AF_INET;
@@ -65,12 +72,15 @@ bool network::LaunchServer(const int port, OUT SOCKET &out)
 	if (bind(ssock, (struct sockaddr*)&server_addr, sizeof(server_addr)) < 0)
 	{
 		//perror("bind()");
+		cout << "bind() error" << endl;
 		return false;
 	}
 
 	if (listen(ssock, 8) < 0)
 	{
 		//perror("listen()");
+		cout << "listen() error" << endl;
+		close(ssock);
 		return false;
 	}
 
@@ -79,6 +89,7 @@ bool network::LaunchServer(const int port, OUT SOCKET &out)
 	if (nRet == SOCKET_ERROR)
 	{
 		//clog::Error( clog::ERROR_CRITICAL, "gethostname() error\n" );
+		cout << "gethostname() error" << endl;
 		close(ssock);
 		return false;
 	}
